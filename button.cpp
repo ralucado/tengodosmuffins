@@ -30,7 +30,7 @@ int Button::getClicks(){
     return c;
 }
 
-void Button::update(sf::Vector2i mousePosition){
+void Button::update(sf::Vector2f mousePosition){
     //cout << "state = " << _state << endl;
     if(_state != ButtonState::off){
         if(!inside(mousePosition)) _state = 0;
@@ -40,9 +40,9 @@ void Button::update(sf::Vector2i mousePosition){
     setTextureRect(sf::IntRect(0,_ySize*_state,_xSize,_ySize));
 }
 
-bool Button::inside(sf::Vector2i position){
+bool Button::inside(sf::Vector2f position){
     sf::FloatRect boundingBox = getGlobalBounds();
-    if (boundingBox.contains(sf::Vector2f(position.x, position.y))) return true;
+    if (boundingBox.contains(position.x, position.y)) return true;
     //cout << "outside!" << endl;
     return false;
 }

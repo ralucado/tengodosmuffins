@@ -14,13 +14,13 @@ public:
     int getClicks();
     //buttons auto-detect if they are pressed, you just have to pass a mouse-event to them
     void handleMouseEvent(sf::Event& event);
-    void update(sf::Vector2i mousePosition);
+    void update(sf::Vector2f mousePosition);
 
 protected:
     int _xSize;
     int _ySize;
     sf::Texture _texture;
-    bool inside(sf::Vector2i position);
+    bool inside(sf::Vector2f position);
 
 private:
     int _clicks;
