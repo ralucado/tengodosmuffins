@@ -1,7 +1,6 @@
 #include "Zombie.hpp"
 
-Zombie::Zombie()
-{
+Zombie::Zombie(sf::Image* collisionMap) : Character(collisionMap) {
 
 }
 

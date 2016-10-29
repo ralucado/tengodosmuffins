@@ -5,7 +5,7 @@
 
 class Zombie : public Character {
     public:
-        Zombie();
+        Zombie(sf::Image* collisionMap);
 
         void update(float deltaTime);
 };

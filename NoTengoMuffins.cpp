@@ -1,5 +1,6 @@
 #include "NoTengoMuffins.hpp"
 #include "InputManager.hpp"
+#include "Map.hpp"
 
 NoTengoMuffins::NoTengoMuffins() {
 
@@ -16,14 +17,18 @@ NoTengoMuffins::NoTengoMuffins() {
     InputManager::bind(InputAction::moveX1, 1, sf::Joystick::Axis::X);
     InputManager::bind(InputAction::recharge1, 1, 4);
     InputManager::bind(InputAction::shot1, 1, 0);
+
+    ASSERT(collisionMap.loadFromFile("Resources/BackgroundTest.png"));
+    player = new Player(&collisionMap);
+    map = new Map(&collisionMap);
 }
 
 NoTengoMuffins::~NoTengoMuffins() {
+    delete player;
 }
 
 // Main game loop
 void NoTengoMuffins::update(float deltaTime, sf::RenderWindow*window) {
-
     InputManager::update();
     sf::Event event;
     while(window->pollEvent(event)){
@@ -54,5 +59,7 @@ void NoTengoMuffins::draw(sf::RenderWindow*window) {
     window->clear(sf::Color::Cyan);
     // draw shit
     _menu.draw(window);
+    //map->draw(window);
+    player->draw(window);
     window->display();
 }

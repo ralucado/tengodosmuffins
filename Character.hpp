@@ -4,10 +4,12 @@
 
 class Character : public sf::Sprite {
     public:
-        Character();
+        Character(sf::Image* collisionMap);
 
-        void moveWithCollisions(sf::Vector2f dist, sf::Image& collisionMap);
-        bool collides(sf::Image& collision, sf::Vector2f dist);
+        void moveWithCollisions(sf::Vector2f dist);
+        bool collides(sf::Vector2f dist);
+    private:
+        sf::Image* collisionMap = nullptr;
 };
 
 #endif // CHARACTER_HPP

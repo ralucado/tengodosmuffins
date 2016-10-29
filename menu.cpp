@@ -12,7 +12,7 @@ Menu::Menu(){
 void Menu::update(float deltaTime, sf::RenderWindow*window){
     float dx = InputManager::action(InputAction::moveX0);
     _buttons[0]->move(dx,0);
-    std::cout << dx << std::endl;
+    //std::cout << dx << std::endl;
     for(unsigned int i = 0; i < _buttons.size(); ++i){
         _buttons[i]->update(sf::Mouse::getPosition(*window));
     }

@@ -1,12 +1,17 @@
 #include "Player.hpp"
+#include "InputManager.hpp"
 
-Player::Player()
-{
-
+Player::Player(sf::Image* collisionMap) : Character(collisionMap) {
+    ASSERT(t.loadFromFile("Resources/buttontejempl2.png"));
+    setTexture(t);
+    setTextureRect(sf::IntRect(0, 0, 64, 64));
 }
 
 void Player::update(float deltaTime)
 {
+    float dx = InputManager::action(InputAction::moveX0)*deltaTime;
+    float dy = InputManager::action(InputAction::moveY0)*deltaTime;
+    moveWithCollisions(sf::Vector2f(dx, dy));
     //animation states: idle, moving left/right/up/down, shoot (idle, while moving), recharge
     //action states: idle, moving, recharging
     /*
@@ -21,3 +26,6 @@ void Player::update(float deltaTime)
     */
 }
 
+void Player::draw(sf::RenderWindow* window) {
+    window->draw(*this);
+}

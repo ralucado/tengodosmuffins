@@ -5,9 +5,11 @@
 
 class Player : public Character {
     public:
-        Player();
+        Player(sf::Image* collisionMap);
 
         void update(float deltaTime);
+        void draw(sf::RenderWindow* window);
+        sf::Texture t;
 };
 
 #endif // PLAYER_H
