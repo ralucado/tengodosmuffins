@@ -21,12 +21,28 @@ NoTengoMuffins::NoTengoMuffins() {
     InputManager::bind(InputAction::shot1, 1, 0);
 
     ASSERT(collisionMap.loadFromFile("Resources/BackgroundTest.png"));
-    player = new Player(&collisionMap);
+    player1 = new Player(&collisionMap,
+        {
+            InputAction::shot0,
+            InputAction::recharge0,
+            InputAction::moveX0,
+            InputAction::moveY0
+        }
+    );
+    player2 = new Player(&collisionMap,
+        {
+            InputAction::shot1,
+            InputAction::recharge1,
+            InputAction::moveX1,
+            InputAction::moveY1
+        }
+    );
     map = new Map(&collisionMap);
 }
 
 NoTengoMuffins::~NoTengoMuffins() {
-    delete player;
+    delete player1;
+    delete player2;
 }
 
 // Main game loop
@@ -53,7 +69,8 @@ void NoTengoMuffins::update(float deltaTime, sf::RenderWindow*window) {
         }
     }
     _menu.update(deltaTime, window);
-    player->update(deltaTime);
+    player1->update(deltaTime);
+    player2->update(deltaTime);
     // do shit
 }
 
@@ -63,6 +80,7 @@ void NoTengoMuffins::draw(sf::RenderWindow*window) {
     // draw shit
     map->draw(window);
     _menu.draw(window);
-    player->draw(window);
+    player1->draw(window);
+    player2->draw(window);
     window->display();
 }

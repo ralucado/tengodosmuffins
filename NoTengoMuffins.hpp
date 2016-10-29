@@ -18,7 +18,8 @@ class NoTengoMuffins : public Game {
         virtual void update(float deltaTime, sf::RenderWindow *window) final override;
         virtual void draw(sf::RenderWindow *window) final override;
         sf::Image collisionMap;
-        Player* player = nullptr;
+        Player* player1 = nullptr;
+        Player* player2 = nullptr;
         Map* map;
 };
 
