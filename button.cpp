@@ -4,9 +4,10 @@ Button::Button(std::string path){
     //cout << "init!" << endl;
     initTexture(path);
 }
-
+/*
 Button::Button(){
-}
+    std::cout << "ekiscu se muere!0" << std::endl;
+}*/
 
 bool Button::isOn(){
     return _state != ButtonState::off;
@@ -47,24 +48,23 @@ bool Button::inside(sf::Vector2i position){
 }
 
 void Button::handleMouseEvent(sf::Event& event){
-   //cout << "event state = " << _state << endl;
-        switch (event.type){
-            case (sf::Event::MouseButtonPressed):
-                if(_state == ButtonState::active) _state = ButtonState::pressed;
-            break;
+    //cout << "event state = " << _state << endl;
+    switch (event.type){
+        case (sf::Event::MouseButtonPressed):
+        if(_state == ButtonState::active) _state = ButtonState::pressed;
+        break;
 
-            case (sf::Event::MouseButtonReleased):
-                if(_state == ButtonState::pressed){
-                    _state = ButtonState::active;
-                    ++_clicks;
-                    //cout << "Click!" << _clicks << endl;
-                }
-            break;
-
-        default:
-            break;
+        case (sf::Event::MouseButtonReleased):
+        if(_state == ButtonState::pressed){
+            _state = ButtonState::active;
+            ++_clicks;
+            //cout << "Click!" << _clicks << endl;
         }
-        //cout << "event state = " << _state << endl;
+        break;
+        default:
+        break;
+    }
+    //cout << "event state = " << _state << endl;
 }
 
 void Button::initTexture(std::string path){

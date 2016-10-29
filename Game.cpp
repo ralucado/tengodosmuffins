@@ -6,6 +6,7 @@ Game::Game() {
     ASSERT(Game::instance == nullptr); //Two games created
     Game::instance = this;
     isRunning = true;
+
 }
 
 Game::~Game() {

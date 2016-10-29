@@ -1,7 +1,7 @@
 #include "NoTengoMuffins.hpp"
 
 int main() {
-    NoTengoMuffins game = NoTengoMuffins();
+    NoTengoMuffins game;
     game.run();
     return 0;
 }

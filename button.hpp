@@ -7,7 +7,7 @@ class Button : public sf::Sprite{
 public:
     Button(std::string path);
     //upon creating a button, its state is set to off by default, you must activate it maually after declaration
-    Button();
+    //Button();
     void turnOn();
     void turnOff();
     bool isOn();

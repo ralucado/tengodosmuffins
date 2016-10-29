@@ -7,6 +7,9 @@
 #include <assert.h>
 #include <iostream>
 #include <string>
+#include <vector>
+
+const int SCENE_NUM = 4;
 
 #define ASSERT(expression) do \
 { \
@@ -26,8 +29,8 @@ namespace ButtonState {
     enum basicState {released, active, pressed, off};
 }
 
-namespace GameState {
-    enum gameState{menu,inGame,help,credits};
+namespace GameScene {
+    enum gameScene{menu,inGame,help,credits};
 }
 
 #endif //COMMONS_HPP

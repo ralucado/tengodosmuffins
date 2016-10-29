@@ -1,8 +1,13 @@
 #include "NoTengoMuffins.hpp"
 
 NoTengoMuffins::NoTengoMuffins() {
-    _state = GameState::menu;
-    std::cout << "in menu" << std::endl;
+
+    //std::cout << "what " << std::endl;
+
+    _scene = GameScene::menu;
+    _scenes = std::vector<Scene*>(SCENE_NUM);
+    //std::cout << "in menu" << std::endl;
+    _scenes[GameScene::menu] = &_menu;
 }
 
 NoTengoMuffins::~NoTengoMuffins() {
@@ -21,22 +26,16 @@ void NoTengoMuffins::update(float deltaTime, sf::RenderWindow*window) {
                 // Exit the game like this
                 Game::i()->isRunning = false;
             break;
-            case (sf::Event::MouseMoved):
             case (sf::Event::MouseButtonPressed):
-            switch(_state){
-                case(GameState::menu):
-                //std::cout << "still in menu" << std::endl;
-                break;
-                default:
-                break;
-            }
+            case (sf::Event::MouseButtonReleased) :
+            _scenes[_scene]->updateButtons(event);
 
             default:
             break;
 
         }
     }
-
+    _menu.update(deltaTime, window);
     // do shit
 }
 
@@ -44,5 +43,6 @@ void NoTengoMuffins::draw(sf::RenderWindow*window) {
     //a e s t h e t i c s
     window->clear(sf::Color::Cyan);
     // draw shit
+    _menu.draw(window);
     window->display();
 }
