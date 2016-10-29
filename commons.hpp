@@ -1,3 +1,5 @@
+#ifndef COMMONS_HPP
+#define COMMONS_HPP
 #include <SFML/Audio.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
@@ -15,3 +17,5 @@
     std::exit(-1); \
     } \
 } while (0)
+
+#endif //COMMONS_HPP
