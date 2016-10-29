@@ -12,8 +12,8 @@ class Game {
 
         bool isRunning = true;
     protected:
-        virtual void update(float deltaTime) = 0;
-        virtual void draw() = 0;
+        virtual void update(float deltaTime, sf::RenderWindow*window) = 0;
+        virtual void draw(sf::RenderWindow*window) = 0;
     private:
         static Game* instance;
 };

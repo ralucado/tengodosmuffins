@@ -16,12 +16,13 @@ Game::~Game() {
 // Main game loop
 void Game::run() {
     sf::Clock c;
+    sf::RenderWindow window();
     float oldTime = c.getElapsedTime().asSeconds();
     while (isRunning) {
         float time = c.getElapsedTime().asSeconds();
         float deltaTime = time-oldTime;
         oldTime = time;
-        update(deltaTime);
-        draw();
+        update(deltaTime,&window);
+        draw(&window);
     }
 }
