@@ -18,7 +18,8 @@ SOURCES += \
     Zombie.cpp \
     Player.cpp \
     InputManager.cpp \
-    Map.cpp
+    Map.cpp \
+    party.cpp
 
 HEADERS += \
     commons.hpp \
@@ -31,4 +32,5 @@ HEADERS += \
     Zombie.hpp \
     Player.hpp \
     InputManager.hpp \
-    Map.hpp
+    Map.hpp \
+    party.hpp

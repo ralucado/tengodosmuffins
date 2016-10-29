@@ -6,48 +6,20 @@ NoTengoMuffins::NoTengoMuffins() {
 
     //std::cout << "what " << std::endl;
 
-    _scene = GameScene::menu;
+    _scene = GameScene::inGame;
     _scenes = std::vector<Scene*>(SCENE_NUM);
     //std::cout << "in menu" << std::endl;
     _scenes[GameScene::menu] = &_menu;
+    _scenes[GameScene::inGame] = &_party;
 
-    InputManager::bind(InputAction::moveX0, 0, sf::Joystick::Axis::X);
-    InputManager::bind(InputAction::moveY0, 0, sf::Joystick::Axis::Y);
-    InputManager::bind(InputAction::recharge0, 0, 4);
-    InputManager::bind(InputAction::shot0, 0, 0);
-    InputManager::bind(InputAction::moveX1, 1, sf::Joystick::Axis::X);
-    InputManager::bind(InputAction::moveY1, 1, sf::Joystick::Axis::Y);
-    InputManager::bind(InputAction::recharge1, 1, 4);
-    InputManager::bind(InputAction::shot1, 1, 0);
-
-    ASSERT(collisionMap.loadFromFile("Resources/BackgroundTest.png"));
-    player1 = new Player(&collisionMap,
-        {
-            InputAction::shot0,
-            InputAction::recharge0,
-            InputAction::moveX0,
-            InputAction::moveY0
-        }
-    );
-    player2 = new Player(&collisionMap,
-        {
-            InputAction::shot1,
-            InputAction::recharge1,
-            InputAction::moveX1,
-            InputAction::moveY1
-        }
-    );
-    map = new Map(&collisionMap);
 }
 
 NoTengoMuffins::~NoTengoMuffins() {
-    delete player1;
-    delete player2;
+
 }
 
 // Main game loop
 void NoTengoMuffins::update(float deltaTime, sf::RenderWindow*window) {
-    InputManager::update();
     sf::Event event;
     while(window->pollEvent(event)){
         switch (event.type) {
@@ -68,9 +40,8 @@ void NoTengoMuffins::update(float deltaTime, sf::RenderWindow*window) {
 
         }
     }
-    _menu.update(deltaTime, window);
-    player1->update(deltaTime);
-    player2->update(deltaTime);
+    _scenes[_scene]->update(deltaTime,window);
+
     // do shit
 }
 
@@ -78,9 +49,6 @@ void NoTengoMuffins::draw(sf::RenderWindow*window) {
     //a e s t h e t i c s
     window->clear(sf::Color::Cyan);
     // draw shit
-    map->draw(window);
-    _menu.draw(window);
-    player1->draw(window);
-    player2->draw(window);
+    _scenes[_scene]->draw(window);
     window->display();
 }

@@ -4,6 +4,7 @@
 #include "scene.hpp"
 #include "Player.hpp"
 #include "menu.h"
+#include "party.hpp"
 
 class Map;
 class NoTengoMuffins : public Game {
@@ -15,12 +16,9 @@ class NoTengoMuffins : public Game {
         GameScene::gameScene _scene;
         std::vector<Scene*> _scenes;
         Menu _menu;
+        Party _party;
         virtual void update(float deltaTime, sf::RenderWindow *window) final override;
         virtual void draw(sf::RenderWindow *window) final override;
-        sf::Image collisionMap;
-        Player* player1 = nullptr;
-        Player* player2 = nullptr;
-        Map* map;
 };
 
 #endif //NOTENGOMUFFINS_HPP

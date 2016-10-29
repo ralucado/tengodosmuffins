@@ -24,16 +24,16 @@ void Menu::update(float deltaTime, sf::RenderWindow*window){
 void Menu::draw(sf::RenderWindow* window){
     for(unsigned int i = 0; i < _buttons.size(); ++i){
         window->draw(*_buttons[i]);
-        //        sf::RectangleShape r(sf::Vector2f(_buttons[i]->getGlobalBounds().width,_buttons[i]->getGlobalBounds().height));
-        //        r.setPosition(_buttons[i]->getGlobalBounds().left, _buttons[i]->getGlobalBounds().top);
-        //        r.setOutlineThickness(1);
-        //        r.setOutlineColor(sf::Color::Red);
-        //        r.setFillColor(sf::Color::Transparent);
-        //        window->draw(r);
-        //        sf::RectangleShape z(sf::Vector2f(5,5));
-        //        z.setPosition(sf::Mouse::getPosition(*window).x, sf::Mouse::getPosition(*window).y);
-        //        z.setFillColor(sf::Color::Blue);
-        //        window->draw(z);
+//        sf::RectangleShape r(sf::Vector2f(_buttons[i]->getGlobalBounds().width,_buttons[i]->getGlobalBounds().height));
+//        r.setPosition(_buttons[i]->getGlobalBounds().left, _buttons[i]->getGlobalBounds().top);
+//        r.setOutlineThickness(1);
+//        r.setOutlineColor(sf::Color::Red);
+//        r.setFillColor(sf::Color::Transparent);
+//        window->draw(r);
+//        sf::RectangleShape z(sf::Vector2f(5,5));
+//        z.setPosition(sf::Mouse::getPosition(*window).x, sf::Mouse::getPosition(*window).y);
+//        z.setFillColor(sf::Color::Blue);
+//        window->draw(z);
     }
 }
 
