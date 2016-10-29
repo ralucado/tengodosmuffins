@@ -8,8 +8,8 @@ class NoTengoMuffins : public Game {
         virtual ~NoTengoMuffins();
 
     private:
-        virtual void update(float deltaTime, sf::RenderWindow*window) final override;
-        virtual void draw(sf::RenderWindow* window) final override;
+        virtual void update(float deltaTime, sf::RenderWindow *window) final override;
+        virtual void draw(sf::RenderWindow *window) final override;
 };
 
 #endif //NOTENGOMUFFINS_HPP
