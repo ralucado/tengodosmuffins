@@ -12,9 +12,11 @@ NoTengoMuffins::NoTengoMuffins() {
     _scenes[GameScene::menu] = &_menu;
 
     InputManager::bind(InputAction::moveX0, 0, sf::Joystick::Axis::X);
+    InputManager::bind(InputAction::moveY0, 0, sf::Joystick::Axis::Y);
     InputManager::bind(InputAction::recharge0, 0, 4);
     InputManager::bind(InputAction::shot0, 0, 0);
     InputManager::bind(InputAction::moveX1, 1, sf::Joystick::Axis::X);
+    InputManager::bind(InputAction::moveY1, 1, sf::Joystick::Axis::Y);
     InputManager::bind(InputAction::recharge1, 1, 4);
     InputManager::bind(InputAction::shot1, 1, 0);
 
@@ -51,6 +53,7 @@ void NoTengoMuffins::update(float deltaTime, sf::RenderWindow*window) {
         }
     }
     _menu.update(deltaTime, window);
+    player->update(deltaTime);
     // do shit
 }
 
@@ -58,8 +61,8 @@ void NoTengoMuffins::draw(sf::RenderWindow*window) {
     //a e s t h e t i c s
     window->clear(sf::Color::Cyan);
     // draw shit
+    map->draw(window);
     _menu.draw(window);
-    //map->draw(window);
     player->draw(window);
     window->display();
 }

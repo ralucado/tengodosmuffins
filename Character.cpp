@@ -34,12 +34,18 @@ void Character::moveWithCollisions(sf::Vector2f dist) {
 
 bool Character::collides(sf::Vector2f dist)
 {
-    sf::FloatRect rect = getLocalBounds();
+    sf::FloatRect r = getLocalBounds();
     sf::Vector2f pos = getPosition()+dist;
-    if(collisionMap->getPixel(rect.left+pos.x,              rect.top+pos.y) == sf::Color(0,0,0)) return true;
-    if(collisionMap->getPixel(rect.left+rect.width+pos.x,   rect.top+pos.y) == sf::Color(0,0,0)) return true;
-    if(collisionMap->getPixel(rect.left+pos.x,              rect.top-rect.height+pos.y) == sf::Color(0,0,0)) return true;
-    if(collisionMap->getPixel(rect.left+rect.width+pos.x,   rect.top-rect.height+pos.y) == sf::Color(0,0,0)) return true;
+    sf::Image* p = collisionMap;
+    sf::Color c = sf::Color::Black;
+
+    if(
+       p->getPixel(r.left+pos.x, r.top+pos.y) == c ||
+       p->getPixel(r.left+r.width+pos.x, r.top+pos.y) == c ||
+       p->getPixel(r.left+pos.x, r.top+r.height+pos.y) == c ||
+       p->getPixel(r.left+r.width+pos.x, r.top+r.height+pos.y) == c
+    )
+        return true;
     return false;
 }
 

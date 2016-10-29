@@ -9,8 +9,8 @@ Player::Player(sf::Image* collisionMap) : Character(collisionMap) {
 
 void Player::update(float deltaTime)
 {
-    float dx = InputManager::action(InputAction::moveX0)*deltaTime;
-    float dy = InputManager::action(InputAction::moveY0)*deltaTime;
+    float dx = InputManager::action(InputAction::moveX0)*deltaTime*speed;
+    float dy = InputManager::action(InputAction::moveY0)*deltaTime*speed;
     moveWithCollisions(sf::Vector2f(dx, dy));
     //animation states: idle, moving left/right/up/down, shoot (idle, while moving), recharge
     //action states: idle, moving, recharging
