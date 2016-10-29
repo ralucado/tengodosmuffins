@@ -3,9 +3,10 @@
 #include "commons.hpp"
 #include "scene.hpp"
 #include "InputManager.hpp"
-#include "Map.hpp"
-#include "Player.hpp"
 
+class Player;
+class Zombie;
+class Map;
 class Party : public Scene{
     public:
         Party();
@@ -19,8 +20,11 @@ class Party : public Scene{
         void updateButtons(sf::Event e) final override;
     private:
         sf::Image collisionMap;
+        sf::Texture playerTex;
+        sf::Texture zombieTex;
         Player* player1 = nullptr;
         Player* player2 = nullptr;
+        std::vector<Zombie*> zombies;
         Map* map;
 
 };

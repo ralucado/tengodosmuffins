@@ -1,10 +1,37 @@
 #include "Character.hpp"
 
-Character::Character(sf::Image* collisionMap) : collisionMap(collisionMap) {
+Character::Character(sf::Texture* tex, sf::Image* collisionMap) : t(tex), collisionMap(collisionMap) {
+    setPosition(960, 540);
+    setTexture(*tex);
+    updateTextureRect();
 }
 
-void Character::moveWithCollisions(sf::Vector2f dist) {
+void Character::updateTextureRect() {
+    setTextureRect(sf::IntRect(currFrame*spriteSize.x, currState*spriteSize.y, spriteSize.x, spriteSize.y));
+}
+
+void Character::setAnimState(unsigned int state) {
+    currState = state;
+    updateTextureRect();
+}
+
+unsigned int Character::getAnimState() {
+    return currState;
+}
+
+void Character::updateAnimState(float deltaTime) {
+    currTime += deltaTime;
+    while(currTime >= frameTime) {
+        currTime -= frameTime;
+        currFrame = (currFrame+1)%numFrames;
+        updateTextureRect();
+    }
+}
+
+bool Character::moveWithCollisions(sf::Vector2f dist) {
+    bool colliding = false;
     if(collides(sf::Vector2f(dist.x, 0))) {
+        colliding = true;
         float min = 0;
         float max = 1;
         while(max-min > 0.001) { //search for the maximum distance you can move
@@ -18,6 +45,7 @@ void Character::moveWithCollisions(sf::Vector2f dist) {
     }
 
     if(collides(sf::Vector2f(0, dist.y))) {
+        colliding = true;
         float min = 0;
         float max = 1;
         while(max-min > 0.001) { //search for the maximum distance you can move
@@ -30,35 +58,33 @@ void Character::moveWithCollisions(sf::Vector2f dist) {
         dist.y *= min;
     }
     move(dist);
+    return colliding;
 }
 
 bool in_interval(float v, float lo, float hi) {
     return v >= lo && v <= hi;
 }
 
+bool checkPixel(sf::Image* i, sf::Vector2f v, sf::Color& c) {
+    return (in_interval(v.x, 0, i->getSize().x-1) &&
+            in_interval(v.y, 0, i->getSize().y-1) &&
+            i->getPixel(v.x, v.y) == c);
+}
+
 bool Character::collides(sf::Vector2f dist)
 {
     sf::FloatRect r = getLocalBounds();
     sf::Vector2f pos = getPosition()+dist;
-    sf::Image* p = collisionMap;
     sf::Color c = sf::Color::Black;
     int size = 64;
     sf::Vector2f topleft = {r.left+pos.x, r.top+pos.y};
-    std::vector<sf::Vector2f> colliders;
     for(int i = 0; i < size; i++) {
-        colliders.push_back(topleft + sf::Vector2f(i, 0));
-        colliders.push_back(topleft + sf::Vector2f(0, i));
-        colliders.push_back(topleft + sf::Vector2f(size, i));
-        colliders.push_back(topleft + sf::Vector2f(i, size));
-    };
-    float minX = 0;
-    float maxX = p->getSize().x-1;
-    float minY = 0;
-    float maxY = p->getSize().y-1;
-    for(auto& pt : colliders) {
-        if(in_interval(pt.x, minX, maxX) && in_interval(pt.y, minY, maxY) && p->getPixel(pt.x, pt.y) == c)
+        if(checkPixel(collisionMap, topleft + sf::Vector2f(i, 0), c) ||
+           checkPixel(collisionMap, topleft + sf::Vector2f(0, i), c) ||
+           checkPixel(collisionMap, topleft + sf::Vector2f(size, i), c) ||
+           checkPixel(collisionMap, topleft + sf::Vector2f(i, size), c))
             return true;
-    }
+    };
     return false;
 }
 
