@@ -8,6 +8,7 @@ class NoTengoMuffins : public Game {
         virtual ~NoTengoMuffins();
 
     private:
+        GameState::gameState _state;
         virtual void update(float deltaTime, sf::RenderWindow *window) final override;
         virtual void draw(sf::RenderWindow *window) final override;
 };

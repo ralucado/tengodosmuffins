@@ -4,8 +4,9 @@
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
-#include <iostream>
 #include <assert.h>
+#include <iostream>
+#include <string>
 
 #define ASSERT(expression) do \
 { \
@@ -17,5 +18,16 @@
     std::exit(-1); \
     } \
 } while (0)
+
+namespace ButtonState {
+//namespace for button states (for the menu)
+//released is the regular state of the button, it activates when you move the mouse over it
+//off means it is drawn but not clickable.
+    enum basicState {released, active, pressed, off};
+}
+
+namespace GameState {
+    enum gameState{menu,inGame,help,credits};
+}
 
 #endif //COMMONS_HPP

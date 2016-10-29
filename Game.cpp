@@ -16,7 +16,7 @@ Game::~Game() {
 // Main game loop
 void Game::run() {
     sf::Clock c;
-    sf::RenderWindow window;
+    sf::RenderWindow window(sf::VideoMode(800, 600), "SFML window");
     float oldTime = c.getElapsedTime().asSeconds();
     while (isRunning) {
         float time = c.getElapsedTime().asSeconds();
@@ -25,4 +25,5 @@ void Game::run() {
         update(deltaTime, &window);
         draw( &window);
     }
+    window.close();
 }
