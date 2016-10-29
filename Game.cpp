@@ -16,7 +16,7 @@ Game::~Game() {
 // Main game loop
 void Game::run() {
     sf::Clock c;
-    sf::RenderWindow window(sf::VideoMode(800, 600), "SFML window");
+    sf::RenderWindow window(sf::VideoMode::getDesktopMode(), "Tengo Dos Muffins!");
     float oldTime = c.getElapsedTime().asSeconds();
     while (isRunning) {
         float time = c.getElapsedTime().asSeconds();
