@@ -15,6 +15,9 @@ SOURCES += \
     button.cpp \
     scene.cpp \
     menu.cpp
+    Zombie.cpp \
+    Player.cpp
+
 
 HEADERS += \
     commons.hpp \
@@ -24,3 +27,5 @@ HEADERS += \
     button.hpp \
     scene.hpp \
     menu.h
+    Zombie.hpp \
+    Player.hpp
