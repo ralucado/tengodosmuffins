@@ -10,17 +10,26 @@ Menu::Menu(){
 }
 
 void Menu::update(float deltaTime, sf::RenderWindow*window){
-    float dx = InputManager::action(InputAction::moveX0);
-    _buttons[0]->move(dx,0);
+    //float dx = InputManager::action(InputAction::moveX0);
+    //_buttons[0]->move(dx,0);
     //std::cout << dx << std::endl;
     for(unsigned int i = 0; i < _buttons.size(); ++i){
         _buttons[i]->update(sf::Mouse::getPosition(*window));
+    }
+    if (_start.getClicks()>0){
+
     }
 }
 
 void Menu::draw(sf::RenderWindow* window){
     for(unsigned int i = 0; i < _buttons.size(); ++i){
-            window->draw(*_buttons[i]);
+        window->draw(*_buttons[i]);
+        sf::RectangleShape r(sf::Vector2f(_buttons[i]->getGlobalBounds().width,_buttons[i]->getGlobalBounds().height));
+                r.setPosition(_buttons[i]->getGlobalBounds().left, _buttons[i]->getGlobalBounds().top);
+        r.setOutlineThickness(1);
+        r.setOutlineColor(sf::Color::Red);
+        r.setFillColor(sf::Color::Transparent);
+        window->draw(r);
     }
 }
 
