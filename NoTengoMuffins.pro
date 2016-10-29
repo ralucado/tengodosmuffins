@@ -12,11 +12,15 @@ SOURCES += \
     NoTengoMuffins.cpp \
     Game.cpp \
     Character.cpp \
-    button.cpp
+    button.cpp \
+    Zombie.cpp \
+    Player.cpp
 
 HEADERS += \
     commons.hpp \
     NoTengoMuffins.hpp \
     Game.hpp \
     Character.hpp \
-    button.hpp
+    button.hpp \
+    Zombie.hpp \
+    Player.hpp

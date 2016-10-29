@@ -7,7 +7,7 @@ class Character : public sf::Sprite {
         Character();
 
         void moveWithCollisions(sf::Vector2f dist, sf::Image& collisionMap);
-        bool collides(sf::Image& collision);
+        bool collides(sf::Image& collision, sf::Vector2f dist);
 };
 
 #endif // CHARACTER_HPP
