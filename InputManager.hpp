@@ -11,7 +11,7 @@ enum InputAction {
   recharge1,
   moveX0,
   moveX1,
-  MoveY0,
+  moveY0,
   moveY1
 };
 

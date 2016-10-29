@@ -3,7 +3,7 @@
 #include "commons.hpp"
 #include "scene.hpp"
 #include "button.hpp"
-
+#include "InputManager.hpp"
 class Menu : public Scene{
     public:
         Menu();

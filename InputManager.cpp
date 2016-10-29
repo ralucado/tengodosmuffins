@@ -140,12 +140,11 @@ void InputManager::update() {
         }
     }
     for (auto& jas : joystickAxisBinds) {
-        if (sf::Joystick::getAxisPosition(jas.second.nPad,jas.second.j)) {
-            jas.second.pos = true;
+        jas.second.pos = sf::Joystick::getAxisPosition(jas.second.nPad,jas.second.j);
+        if (jas.second.pos) {
             jas.second.c += 1;
         }
         else {
-            jas.second.pos = false;
             jas.second.c = 0;
         }
 
