@@ -16,7 +16,8 @@ SOURCES += \
     scene.cpp \
     menu.cpp
     Zombie.cpp \
-    Player.cpp
+    Player.cpp \
+    InputManager.cpp
 
 
 HEADERS += \
@@ -28,4 +29,5 @@ HEADERS += \
     scene.hpp \
     menu.h
     Zombie.hpp \
-    Player.hpp
+    Player.hpp \
+    InputManager.hpp

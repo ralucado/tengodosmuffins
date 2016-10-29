@@ -1,4 +1,5 @@
 #include "NoTengoMuffins.hpp"
+#include "InputManager.hpp"
 
 NoTengoMuffins::NoTengoMuffins() {
 
@@ -8,6 +9,13 @@ NoTengoMuffins::NoTengoMuffins() {
     _scenes = std::vector<Scene*>(SCENE_NUM);
     //std::cout << "in menu" << std::endl;
     _scenes[GameScene::menu] = &_menu;
+
+    InputManager::bind(InputAction::shot0, 0, sf::Joystick::Axis::X);
+    InputManager::bind(InputAction::recharge0, 0, 4);
+    InputManager::bind(InputAction::shot0, 0, 0);
+    InputManager::bind(InputAction::shot1, 1, sf::Joystick::Axis::X);
+    InputManager::bind(InputAction::recharge1, 1, 4);
+    InputManager::bind(InputAction::shot1, 1, 0);
 }
 
 NoTengoMuffins::~NoTengoMuffins() {
@@ -15,6 +23,7 @@ NoTengoMuffins::~NoTengoMuffins() {
 
 // Main game loop
 void NoTengoMuffins::update(float deltaTime, sf::RenderWindow*window) {
+  InputManager::update();
     sf::Event event;
     while(window->pollEvent(event)){
         switch (event.type) {
