@@ -36,6 +36,9 @@ class Player : public Character {
         Controls controls;
         Direction direction = Down;
         PlayerState playerState = Idle;
+        int shots;
+        int maxshots = 70000;
+        void disparar();
 };
 
 #endif // PLAYER_H

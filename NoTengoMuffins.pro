@@ -19,7 +19,8 @@ SOURCES += \
     Player.cpp \
     InputManager.cpp \
     Map.cpp \
-    party.cpp
+    party.cpp \
+    bullet.cpp
 
 HEADERS += \
     commons.hpp \
@@ -33,4 +34,5 @@ HEADERS += \
     Player.hpp \
     InputManager.hpp \
     Map.hpp \
-    party.hpp
+    party.hpp \
+    bullet.hpp
