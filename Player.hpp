@@ -37,7 +37,7 @@ class Player : public Character {
         Direction direction = Down;
         PlayerState playerState = Idle;
         int shots;
-        int maxshots = 7;
+        int maxshots = 70;
         float shootCooldown = 0.0f;
         float rechargeTimeCounter = 1.5f;
         float rechargeTime = 1.5f;

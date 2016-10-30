@@ -35,7 +35,7 @@ Party::Party(){
                                      InputAction::moveY1
                                  } , 8 , 8
                                  ));
-    for(int i = 0; i < 1; ++i)
+    for(int i = 0; i < 100; ++i)
         zombies.push_back(new Zombie(this, &zombieTex, &collisionMap,8,8));
     map = new Map(&backgroundMap);
 }
@@ -68,7 +68,7 @@ void Party::update(float deltaTime, sf::RenderWindow* window){
             if(b->getGlobalBounds().intersects(z->getGlobalBounds())){
                 toDeleteZombies.insert(z);
                 toDelete.insert(b);
-
+                break;
             }
         }
     }
