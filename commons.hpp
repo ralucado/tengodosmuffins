@@ -5,6 +5,7 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 #include <assert.h>
+#include <cmath>
 #include <iostream>
 #include <string>
 #include <vector>

@@ -19,7 +19,9 @@ Party::Party(){
     ASSERT(zombieTex.loadFromFile("Resources/zombieMuffin.png"));
     ASSERT(playerTexFace.loadFromFile("Resources/mafin.png"));
     ASSERT(playerTex.loadFromFile("Resources/mafinPepptiter.png"));
+    ASSERT(playerTex2.loadFromFile("Resources/mafinPepptiter2.png"));
     ASSERT(bulletTex.loadFromFile("Resources/ShittyPepitty.png"));
+    ASSERT(bulletTex2.loadFromFile("Resources/ShittyPepitty2.png"));
     players.push_back(new Player(this, &playerTex, &playerTexFace, &collisionMap,
     {
                                      InputAction::shot0,
@@ -28,7 +30,7 @@ Party::Party(){
                                      InputAction::moveY0
                                  } , 9 , 8
                                  ));
-    players.push_back(new Player(this, &playerTex, &playerTexFace, &collisionMap,
+    players.push_back(new Player(this, &playerTex2, &playerTexFace, &collisionMap,
     {
                                      InputAction::shot1,
                                      InputAction::recharge1,
@@ -75,7 +77,7 @@ void Party::update(float deltaTime, sf::RenderWindow* window){
 
         for(Player* p : players) {
             if(p != b->player && b->getGlobalBounds().intersects(p->getGlobalBounds())){
-                p->push(b->getMov()*2.0f);
+                p->push(b->getMov()*3.0f);
                 toDelete.insert(b);
                 break;
             }
@@ -113,5 +115,5 @@ void Party::updateButtons(sf::Event e){
 
 void Party::newShot(Player* id, sf::Vector2f dir){
 
-    bullets.push_back(new Bullet(this,&bulletTex,&collisionMap,1,1,dir,id));
+    bullets.push_back(new Bullet(this,((id == players[0])? &bulletTex : &bulletTex2),&collisionMap,1,1,dir,id));
 }
