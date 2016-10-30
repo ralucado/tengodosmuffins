@@ -11,29 +11,45 @@ Player::Player(Party* p,sf::Texture* tex, sf::Image* collisionMap, Player::Contr
 void Player::update(float deltaTime)
 {
     shootCooldown = std::max(0.0f, shootCooldown-deltaTime);
-    // Get input
-    float dx = InputManager::action(controls.X);
-    float dy = InputManager::action(controls.Y);
-    float MIN = 0.2f;
-    if(std::abs(dx) < MIN) dx = 0.0f;
-    if(std::abs(dy) < MIN) dy = 0.0f;
-    dx = dx*deltaTime*speed;
-    dy = dy*deltaTime*speed;
-    bool shot = InputManager::action(controls.shot);
-    // Move sprite
-    moveWithCollisions(sf::Vector2f(dx, dy));
+    bool recharging = InputManager::action(controls.recharge);
+    std::cout << recharging << " " << shots << std::endl;
 
-    // Calc anim state
-    playerState = (std::abs(dx) > 0.0f || std::abs(dy) > 0.0f)? Player::Walk : Player::Idle;
-    if(playerState == Player::Walk) {
-        if(std::abs(dy) >= std::abs(dx)) direction = dy > 0 ? Player::Down : Player::Up;
-        else direction = dx > 0 ? Player::Right: Player::Left;
+    if(recharging && shots < maxshots) {
+        rechargeTimeCounter -= deltaTime;
+        if(rechargeTimeCounter <= 0) {
+            newBulletTimeCounter -= deltaTime;
+            if(newBulletTimeCounter <= 0) {
+                newBulletTimeCounter = newBulletTime;
+                ++shots;
+            }
+        }
     }
+    else {
+        rechargeTimeCounter = rechargeTime;
+        newBulletTimeCounter = 0;
+        // Get input
+        float dx = InputManager::action(controls.X);
+        float dy = InputManager::action(controls.Y);
+        float MIN = 0.2f;
+        if(std::abs(dx) < MIN) dx = 0.0f;
+        if(std::abs(dy) < MIN) dy = 0.0f;
+        dx = dx*deltaTime*speed;
+        dy = dy*deltaTime*speed;
+        bool shot = InputManager::action(controls.shot);
+        // Move sprite
+        moveWithCollisions(sf::Vector2f(dx, dy));
 
-    if(shot && shots > 0 && shootCooldown == 0.0f) {
-        disparar();
+        // Calc anim state
+        playerState = (std::abs(dx) > 0.0f || std::abs(dy) > 0.0f)? Player::Walk : Player::Idle;
+        if(playerState == Player::Walk) {
+            if(std::abs(dy) >= std::abs(dx)) direction = dy > 0 ? Player::Down : Player::Up;
+            else direction = dx > 0 ? Player::Right: Player::Left;
+        }
+
+        if(shot && shots > 0 && shootCooldown == 0.0f) {
+            disparar();
+        }
     }
-
     setAnimState(((int)playerState)*4+((int)direction));
     updateAnimState(deltaTime);
 }

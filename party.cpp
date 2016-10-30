@@ -7,11 +7,11 @@
 Party::Party(){
     InputManager::bind(InputAction::moveX0, 0, sf::Joystick::Axis::X);
     InputManager::bind(InputAction::moveY0, 0, sf::Joystick::Axis::Y);
-    InputManager::bind(InputAction::recharge0, 0, 4);
+    InputManager::bind(InputAction::recharge0, 0, 2);
     InputManager::bind(InputAction::shot0, 0, 0);
     InputManager::bind(InputAction::moveX1, 1, sf::Joystick::Axis::X);
     InputManager::bind(InputAction::moveY1, 1, sf::Joystick::Axis::Y);
-    InputManager::bind(InputAction::recharge1, 1, 4);
+    InputManager::bind(InputAction::recharge1, 1, 2);
     InputManager::bind(InputAction::shot1, 1, 0);
 
     ASSERT(collisionMap.loadFromFile("Resources/BackgroundCollider.png"));
