@@ -13,7 +13,7 @@ class Bullet : public Character {
         void draw(sf::RenderWindow* window);
         bool hasCollided();
     private:
-        float speed = 5;
+        float speed = 300;
         sf::Vector2f mov;
         bool collided = false;
         Player* player;

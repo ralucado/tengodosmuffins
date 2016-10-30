@@ -10,6 +10,7 @@ Player::Player(Party* p,sf::Texture* tex, sf::Image* collisionMap, Player::Contr
 
 void Player::update(float deltaTime)
 {
+    shootCooldown = std::max(0.0f, shootCooldown-deltaTime);
     // Get input
     float dx = InputManager::action(controls.X);
     float dy = InputManager::action(controls.Y);
@@ -29,7 +30,9 @@ void Player::update(float deltaTime)
         else direction = dx > 0 ? Player::Right: Player::Left;
     }
 
-    if(shot && shots > 0) disparar();
+    if(shot && shots > 0 && shootCooldown == 0.0f) {
+        disparar();
+    }
 
     setAnimState(((int)playerState)*4+((int)direction));
     updateAnimState(deltaTime);
@@ -47,4 +50,5 @@ void Player::disparar(){
     else if (direction == Player::Right) dir.x = 1;
     else dir.x = -1;
     scene->newShot(this, dir);
+    shootCooldown = .3f;
 }

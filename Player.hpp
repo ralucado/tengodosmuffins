@@ -37,7 +37,13 @@ class Player : public Character {
         Direction direction = Down;
         PlayerState playerState = Idle;
         int shots;
-        int maxshots = 70000;
+        int maxshots = 7;
+        float shootCooldown = 0.0f;
+        float rechargeTimeCounter = 1.5f;
+        float rechargeTime = 1.5f;
+        float newBulletTimeCounter = 0.0f;
+        float newBulletTime = .125f;
+
         void disparar();
 };
 

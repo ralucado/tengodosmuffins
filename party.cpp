@@ -56,22 +56,36 @@ void Party::update(float deltaTime, sf::RenderWindow* window){
         p->update(deltaTime);
     for(Zombie* z : zombies)
         z->update(deltaTime);
-    std::vector<Bullet*> toDelete;
-    std::vector<Zombie*> toDeleteZombies;
+    std::set<Bullet*> toDelete;
+    std::set<Zombie*> toDeleteZombies;
     for(Bullet* b : bullets) {
         b->update(deltaTime);
         if(b->hasCollided()) {
-            toDelete.push_back(b);
+            toDelete.insert(b);
             continue;
         }
         for(Zombie* z : zombies) {
-            sf::Vector2f diff = b->getPosition()-z->getPosition();
+            sf::Vector2f diff = z->getPosition()-z->getPosition();
             float l = sqrt(diff.x*diff.x + diff.y+diff.y);
             if(l < 30) {
-                toDeleteZombies.push_back(z);
-                toDelete.push_back(b);
+                toDeleteZombies.insert(z);
+                toDelete.insert(b);
             }
         }
+    }
+    for(std::vector<Bullet*>::iterator it = bullets.begin(); it != bullets.end();) {
+        if(toDelete.find(*it) != toDelete.end()) {
+            delete *it;
+            it = bullets.erase(it);
+        }
+        else ++it;
+    }
+    for(std::vector<Zombie*>::iterator it = zombies.begin(); it != zombies.end();) {
+        if(toDeleteZombies.find(*it) != toDeleteZombies.end()) {
+            delete *it;
+            it = zombies.erase(it);
+        }
+        else ++it;
     }
 }
 
