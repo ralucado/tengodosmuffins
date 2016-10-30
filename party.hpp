@@ -35,7 +35,7 @@ class Party : public Scene{
         std::vector<Player*> players;
         std::vector<Zombie*> zombies;
         std::vector<Bullet*> bullets;
-        int scoreOffset = 50;
+        int scoreOffset = 64;
         Map* map;
         std::vector< std::vector<sf::Sprite> > scores = std::vector< std::vector<sf::Sprite> >(2,std::vector<sf::Sprite>(0));
         void calcScores();

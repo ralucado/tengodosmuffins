@@ -137,7 +137,7 @@ void Party::calcScores(){
             int n = splitScore[j];
             sn.setTexture(numberText);
             sn.setTextureRect(sf::IntRect((numberText.getSize().x/10)*n,0,numberText.getSize().x/10,numberText.getSize().y));
-            sn.setPosition(scoreOffset+j*numberText.getSize().x/10,scoreOffset);
+            sn.setPosition(1500*i+(scoreOffset+j*numberText.getSize().x/10),scoreOffset);
             aux.push_back(sn);
         }
         scores[i] = aux;
@@ -145,10 +145,14 @@ void Party::calcScores(){
 }
 
 void Party::split_score(std::vector<int>& v, int score){
-    while(score > 0){
-        int n = score%10;
-        score = score/10;
-        v.push_back(n);
+    if(score == 0) v.push_back(0);
+    else{
+        while(score > 0){
+            int n = score%10;
+            score = score/10;
+            v.push_back(n);
+        }
+
+        std::reverse(v.begin(),v.end());
     }
-    std::reverse(v.begin(),v.end());
 }
