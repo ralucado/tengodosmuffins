@@ -6,7 +6,7 @@ class Game {
     public:
         Game();
         virtual ~Game();
-        static Game* i() { return Game::instance;}
+        static Game* i();
 
         virtual void run();
 

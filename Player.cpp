@@ -1,7 +1,8 @@
 #include "Player.hpp"
 #include "InputManager.hpp"
 
-Player::Player(Party* p,sf::Texture* tex, sf::Image* collisionMap, Player::Controls pc) : Character(p, tex, collisionMap), controls(pc) {
+Player::Player(Party* p,sf::Texture* tex, sf::Image* collisionMap, Player::Controls pc, int numStates, int numFrames) : Character(p, tex, collisionMap, numStates, numFrames), controls(pc) {
+
 }
 
 void Player::update(float deltaTime)
@@ -10,7 +11,7 @@ void Player::update(float deltaTime)
     // Get input
     float dx = InputManager::action(controls.X)*deltaTime*speed;
     float dy = InputManager::action(controls.Y)*deltaTime*speed;
-    float MIN = 0.2f;
+    float MIN = 0.3f;
     if(std::abs(dx) < MIN) dx = 0.0f;
     if(std::abs(dy) < MIN) dy = 0.0f;
 

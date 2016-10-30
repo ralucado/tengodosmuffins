@@ -6,7 +6,7 @@ NoTengoMuffins::NoTengoMuffins() {
 
     //std::cout << "what " << std::endl;
 
-    _scene = GameScene::inGame;
+    _scene = GameScene::menu;
     _scenes = std::vector<Scene*>(SCENE_NUM);
     //std::cout << "in menu" << std::endl;
     _scenes[GameScene::menu] = &_menu;
@@ -16,6 +16,14 @@ NoTengoMuffins::NoTengoMuffins() {
 
 NoTengoMuffins::~NoTengoMuffins() {
 
+}
+
+NoTengoMuffins* i(){
+    return static_cast<NoTengoMuffins*>(Game::i());
+}
+
+void NoTengoMuffins::changeScene(GameScene::gameScene n){
+    _scene = n;
 }
 
 // Main game loop

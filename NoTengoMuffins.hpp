@@ -6,12 +6,12 @@
 #include "menu.h"
 #include "party.hpp"
 
-class Map;
 class NoTengoMuffins : public Game {
     public:
         NoTengoMuffins();
         virtual ~NoTengoMuffins();
-
+        static NoTengoMuffins* i();
+        void changeScene(GameScene::gameScene n);
     private:
         GameScene::gameScene _scene;
         std::vector<Scene*> _scenes;

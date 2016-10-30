@@ -19,7 +19,7 @@ class Zombie : public Character {
             Up
         };
 
-        Zombie(Party* p, sf::Texture* tex, sf::Image* collisionMap);
+        Zombie(Party* p, sf::Texture* tex, sf::Image* collisionMap, int nS, int nF);
 
         void update(float deltaTime);
         void draw(sf::RenderWindow* window);
@@ -31,8 +31,8 @@ class Zombie : public Character {
         void followPos(sf::Vector2f pos);
         void calcState();
 
-        float walkSpeed = 150.0f;
-        float chaseSpeed = 400.0f;
+        float walkSpeed = 50.0f;
+        float chaseSpeed = 150.0f;
         sf::Vector2f chasingPoint;
         Direction direction = Down;
         ZombieState zombieState = Idle;

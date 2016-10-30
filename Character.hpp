@@ -5,7 +5,7 @@
 class Party;
 class Character : public sf::Sprite {
     public:
-        Character(Party* p, sf::Texture* tex, sf::Image* collisionMap);
+        Character(Party* p, sf::Texture* tex, sf::Image* collisionMap, int nStates, int nFrames);
 
         bool moveWithCollisions(sf::Vector2f dist);
         bool collides(sf::Vector2f dist);
@@ -22,8 +22,8 @@ class Character : public sf::Sprite {
     private:
         sf::Image* collisionMap = nullptr;
         sf::Vector2f spriteSize = sf::Vector2f(128, 128);
-        unsigned int numStates = 8;
-        unsigned int numFrames = 8;
+        unsigned int numStates;
+        unsigned int numFrames;
         float frameTime = 0.1f; //seconds
         // 0 <= currState < numStates
         unsigned int currState = 0;
