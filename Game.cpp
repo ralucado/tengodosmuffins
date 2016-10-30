@@ -9,6 +9,10 @@ Game::Game() {
 
 }
 
+Game* Game::i() {
+    return Game::instance;
+}
+
 Game::~Game() {
     isRunning = false;
     Game::instance = nullptr;

@@ -3,10 +3,10 @@
 #include "commons.hpp"
 #include "scene.hpp"
 #include "InputManager.hpp"
-
 class Player;
 class Zombie;
 class Map;
+
 class Party : public Scene{
     public:
         Party();

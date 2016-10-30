@@ -26,13 +26,13 @@ class Player : public Character {
             Up
         };
 
-        Player(Party* p, sf::Texture* tex, sf::Image* collisionMap, Controls pc);
+        Player(Party* p, sf::Texture* tex, sf::Image* collisionMap, Controls pc, int numStates, int numFrames);
 
         void update(float deltaTime);
         void draw(sf::RenderWindow* window);
 
     private:
-        float speed = 500.0f;
+        float speed = 300.0f;
         Controls controls;
         Direction direction = Down;
         PlayerState playerState = Idle;

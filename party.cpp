@@ -2,6 +2,7 @@
 #include "Map.hpp"
 #include "Player.hpp"
 #include "Zombie.hpp"
+#include "NoTengoMuffins.hpp"
 
 Party::Party(){
     InputManager::bind(InputAction::moveX0, 0, sf::Joystick::Axis::X);
@@ -23,7 +24,7 @@ Party::Party(){
             InputAction::recharge0,
             InputAction::moveX0,
             InputAction::moveY0
-        }
+        } , 8 , 8
     ));
     players.push_back(new Player(this, &playerTex, &collisionMap,
         {
@@ -31,10 +32,10 @@ Party::Party(){
             InputAction::recharge1,
             InputAction::moveX1,
             InputAction::moveY1
-        }
+        } , 8 , 8
     ));
     for(int i = 0; i < 100; ++i)
-        zombies.push_back(new Zombie(this, &zombieTex, &collisionMap));
+        zombies.push_back(new Zombie(this, &zombieTex, &collisionMap,8,8));
     map = new Map(&backgroundMap);
 }
 
@@ -62,4 +63,5 @@ void Party::draw(sf::RenderWindow*window){
 }
 
 void Party::updateButtons(sf::Event e){
+
 }
