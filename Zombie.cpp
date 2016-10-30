@@ -22,6 +22,16 @@ void Zombie::calcState() {
     movementTimeLeft = min + (max-min)*((rand()%100)*0.01f);
     if(zombieState == Zombie::Chase) movementTimeLeft = 0.1f;
 }
+int Zombie::getPoints() const
+{
+    return points;
+}
+
+void Zombie::setPoints(int value)
+{
+    points = value;
+}
+
 
 std::pair<bool, sf::Vector2f> Zombie::getNearestPlayerPos() {
     float bestDist = -1;

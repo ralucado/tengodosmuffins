@@ -6,7 +6,7 @@ Player::Player(Party* p,sf::Texture* tex, sf::Texture* texFace, sf::Image* colli
     shots = maxshots;
     setScale(sf::Vector2f(0.5f, 0.5f));
     spriteSize = 128;
-
+    score = 0;
     backTex.setPosition(960, 340);
     backTex.setTexture(*tex);
     backTex.setScale(sf::Vector2f(0.5f, 0.5f));
@@ -22,7 +22,17 @@ void Player::push(sf::Vector2f impulse) {
     pushingTime = totalPushingTime;
 }
 
-void Player::update(float deltaTime) {
+
+void Player::upScore(int amount){
+    score+=amount;
+}
+
+int Player::getScore(){
+    return score;
+}
+
+void Player::update(float deltaTime)
+{
     shootCooldown = std::max(0.0f, shootCooldown-deltaTime);
     pushingTime = std::max(0.0f, pushingTime-deltaTime);
     bool recharging = InputManager::action(controls.recharge);

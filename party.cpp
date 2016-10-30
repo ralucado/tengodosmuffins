@@ -20,6 +20,7 @@ Party::Party(){
     ASSERT(playerTexFace.loadFromFile("Resources/mafin.png"));
     ASSERT(playerTex.loadFromFile("Resources/mafinPepptiter.png"));
     ASSERT(bulletTex.loadFromFile("Resources/ShittyPepitty.png"));
+    ASSERT(numberText.loadFromFile("Resources/numbers.png"));
     players.push_back(new Player(this, &playerTex, &playerTexFace, &collisionMap,
     {
                                      InputAction::shot0,
@@ -39,6 +40,7 @@ Party::Party(){
     for(int i = 0; i < 100; ++i)
         zombies.push_back(new Zombie(this, &zombieTex, &collisionMap,8,8));
     map = new Map(&backgroundMap);
+
 }
 
 Party::~Party(){
@@ -69,6 +71,7 @@ void Party::update(float deltaTime, sf::RenderWindow* window){
             if(b->getGlobalBounds().intersects(z->getGlobalBounds())){
                 toDeleteZombies.insert(z);
                 toDelete.insert(b);
+                b->player->upScore(z->getPoints());
                 break;
             }
         }
@@ -95,6 +98,7 @@ void Party::update(float deltaTime, sf::RenderWindow* window){
         }
         else ++it;
     }
+    calcScores();
 }
 
 void Party::draw(sf::RenderWindow*window){
@@ -105,6 +109,11 @@ void Party::draw(sf::RenderWindow*window){
         z->draw(window);
     for(Bullet* b : bullets)
         b->draw(window);
+    for(int i = 0; i < scores.size(); ++i){
+        for(int j = 0; j < scores[i].size(); ++j){
+            window->draw(scores[i][j]);
+        }
+    }
 }
 
 void Party::updateButtons(sf::Event e){
@@ -114,4 +123,30 @@ void Party::updateButtons(sf::Event e){
 void Party::newShot(Player* id, sf::Vector2f dir){
 
     bullets.push_back(new Bullet(this,&bulletTex,&collisionMap,1,1,dir,id));
+}
+
+void Party::calcScores(){
+    for( int i = 0; i < players.size(); ++i){
+        std::vector<sf::Sprite> aux = std::vector<sf::Sprite>(0);
+        std::vector<int> splitScore;
+        split_score(splitScore, players[i]->getScore());
+        for(int j = 0; j < splitScore.size();++j){
+            sf::Sprite sn;
+            int n = splitScore[j];
+            sn.setTexture(numberText);
+            sn.setTextureRect(sf::IntRect((numberText.getSize().x/10)*n,0,numberText.getSize().x/10,numberText.getSize().y));
+            sn.setPosition(scoreOffset+j*numberText.getSize().x/10,scoreOffset);
+            aux.push_back(sn);
+        }
+        scores[i] = aux;
+    }
+}
+
+void Party::split_score(std::vector<int>& v, int score){
+    while(score > 0){
+        int n = score%10;
+        score = score/10;
+        v.push_back(n);
+    }
+    std::reverse(v.begin(),v.end());
 }

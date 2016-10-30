@@ -29,10 +29,15 @@ class Party : public Scene{
         sf::Texture playerTex;
         sf::Texture zombieTex;
         sf::Texture bulletTex;
+        sf::Texture numberText;
         std::vector<Player*> players;
         std::vector<Zombie*> zombies;
         std::vector<Bullet*> bullets;
+        int scoreOffset = 50;
         Map* map;
+        std::vector< std::vector<sf::Sprite> > scores = std::vector< std::vector<sf::Sprite> >(2,std::vector<sf::Sprite>(0));
+        void calcScores();
+        void split_score(std::vector<int>&, int);
 
 };
 

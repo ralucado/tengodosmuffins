@@ -24,6 +24,10 @@ class Zombie : public Character {
         void update(float deltaTime);
         void draw(sf::RenderWindow* window);
 
+
+        int getPoints() const;
+        void setPoints(int value);
+
     private:
         std::pair<bool, sf::Vector2f> getNearestPlayerPos();
         void calcRandomState();
@@ -33,6 +37,7 @@ class Zombie : public Character {
 
         float walkSpeed = 50.0f;
         float chaseSpeed = 150.0f;
+        int points = 10;
         sf::Vector2f chasingPoint;
         Direction direction = Down;
         ZombieState zombieState = Idle;

@@ -4,6 +4,7 @@
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
+#include <algorithm>
 #include <assert.h>
 #include <iostream>
 #include <string>

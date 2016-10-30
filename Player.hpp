@@ -33,6 +33,8 @@ class Player : public Character {
         void draw(sf::RenderWindow* window);
         void updateBackTextureRect();
         void push(sf::Vector2f impulse);
+        void upScore(int amount);
+        int getScore();
 
     private:
         void disparar();
@@ -45,6 +47,7 @@ class Player : public Character {
         Direction direction = Down;
         PlayerState playerState = Idle;
         int shots;
+        int score;
         int maxshots = 7;
         float shootCooldown = 0.0f;
         float rechargeTimeCounter = 1.5f;
