@@ -10,6 +10,7 @@ sf::Vector2f normalize(const sf::Vector2f& source) {
 
 Zombie::Zombie(Party* p, sf::Texture* tex, sf::Image* collisionMap, int nS, int nF) : Character(p, tex, collisionMap, nS, nF) {
     setScale(sf::Vector2f(0.5f, 0.5f));
+    spriteSize = 128;
 }
 
 void Zombie::calcState() {

@@ -9,7 +9,7 @@ Character::Character(Party* p, sf::Texture* tex, sf::Image* collisionMap, int nS
 }
 
 void Character::updateTextureRect() {
-    setTextureRect(sf::IntRect(currFrame*spriteSize.x, currState*spriteSize.y, spriteSize.x, spriteSize.y));
+    setTextureRect(sf::IntRect(currFrame*spriteSize, currState*spriteSize, spriteSize, spriteSize));
 }
 
 void Character::setAnimState(unsigned int state) {
@@ -78,13 +78,16 @@ bool Character::collides(sf::Vector2f dist)
     sf::FloatRect r = getLocalBounds();
     sf::Vector2f pos = getPosition()+dist;
     sf::Color c = sf::Color::Black;
-    int size = 64;
     sf::Vector2f topleft = {r.left+pos.x, r.top+pos.y};
-    for(int i = 0; i < size; i++) {
+    for(int i = 0; i < spriteSize*getScale().x; i++) {
         if(checkPixel(topleft + sf::Vector2f(i, 0), c) ||
-           checkPixel(topleft + sf::Vector2f(0, i), c) ||
-           checkPixel(topleft + sf::Vector2f(size, i), c) ||
-           checkPixel(topleft + sf::Vector2f(i, size), c))
+           checkPixel(topleft + sf::Vector2f(i, spriteSize*getScale().y), c))
+            return true;
+    }
+    for(int i = 0; i < spriteSize*getScale().y; i++) {
+        if(checkPixel(topleft + sf::Vector2f(0, i), c) ||
+           checkPixel(topleft + sf::Vector2f(spriteSize*getScale().x, i), c)
+           )
             return true;
     };
     return false;

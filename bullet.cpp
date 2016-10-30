@@ -6,6 +6,7 @@ Bullet::Bullet(Party*p, sf::Texture*tex, sf::Image*collisionMap, int numStates, 
     setScale(sf::Vector2f(0.2f, 0.2f));
     setPosition(player->getPosition());
     this->mov = mov*speed;
+    spriteSize = 64;
 }
 
 void Bullet::update(float deltaTime){

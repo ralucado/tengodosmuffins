@@ -18,10 +18,10 @@ class Character : public sf::Sprite {
         bool checkPixel(sf::Vector2f v, sf::Color c);
         sf::Texture* t;
         Party* scene;
+        float spriteSize = 128;
 
     private:
         sf::Image* collisionMap = nullptr;
-        sf::Vector2f spriteSize = sf::Vector2f(128, 128);
         unsigned int numStates;
         unsigned int numFrames;
         float frameTime = 0.1f; //seconds

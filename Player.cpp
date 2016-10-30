@@ -5,6 +5,7 @@
 Player::Player(Party* p,sf::Texture* tex, sf::Image* collisionMap, Player::Controls pc, int numStates, int numFrames) : Character(p, tex, collisionMap, numStates, numFrames), controls(pc) {
     shots = maxshots;
     setScale(sf::Vector2f(0.5f, 0.5f));
+    spriteSize = 128;
 }
 
 void Player::update(float deltaTime)
