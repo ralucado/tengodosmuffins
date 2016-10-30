@@ -12,11 +12,13 @@ class Bullet : public Character {
         void update(float deltaTime);
         void draw(sf::RenderWindow* window);
         bool hasCollided();
+        sf::Vector2f getMov();
+        Player* player;
+
     private:
         float speed = 300;
         sf::Vector2f mov;
         bool collided = false;
-        Player* player;
 };
 
 #endif // BULLET_HPP

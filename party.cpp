@@ -72,6 +72,14 @@ void Party::update(float deltaTime, sf::RenderWindow* window){
                 break;
             }
         }
+
+        for(Player* p : players) {
+            if(p != b->player && b->getGlobalBounds().intersects(p->getGlobalBounds())){
+                p->push(b->getMov()*2.0f);
+                toDelete.insert(b);
+                break;
+            }
+        }
     }
     for(std::vector<Bullet*>::iterator it = bullets.begin(); it != bullets.end();) {
         if(toDelete.find(*it) != toDelete.end()) {

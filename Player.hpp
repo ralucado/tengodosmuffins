@@ -16,8 +16,8 @@ class Player : public Character {
 
         enum PlayerState {
             Idle = 0,
-            Walk = 1,
-            Recharge = 2
+            Walk,
+            Recharge,
         };
 
         enum Direction {
@@ -32,9 +32,14 @@ class Player : public Character {
         void update(float deltaTime);
         void draw(sf::RenderWindow* window);
         void updateBackTextureRect();
-
+        void push(sf::Vector2f impulse);
 
     private:
+        void disparar();
+
+        sf::Vector2f pushImpulse = sf::Vector2f(0, 0);
+        float pushingTime = 0.0f;
+        float totalPushingTime = .5f;
         float speed = 300.0f;
         Controls controls;
         Direction direction = Down;
@@ -46,7 +51,6 @@ class Player : public Character {
         float rechargeTime = 1.5f;
         float newBulletTimeCounter = 0.0f;
         float newBulletTime = .125f;
-        void disparar();
         sf::Sprite backTex;
 };
 

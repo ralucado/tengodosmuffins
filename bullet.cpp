@@ -22,3 +22,9 @@ void Bullet::draw(sf::RenderWindow*window){
 bool Bullet::hasCollided(){
     return collided;
 }
+
+sf::Vector2f Bullet::getMov() {
+    return mov;
+}
+
+

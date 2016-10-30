@@ -17,9 +17,14 @@ void Player::updateBackTextureRect() {
     backTex.setTextureRect(sf::IntRect(shots*spriteSize, direction*spriteSize, spriteSize, spriteSize));
 }
 
-void Player::update(float deltaTime)
-{
+void Player::push(sf::Vector2f impulse) {
+    pushImpulse = impulse;
+    pushingTime = totalPushingTime;
+}
+
+void Player::update(float deltaTime) {
     shootCooldown = std::max(0.0f, shootCooldown-deltaTime);
+    pushingTime = std::max(0.0f, pushingTime-deltaTime);
     bool recharging = InputManager::action(controls.recharge);
     if(recharging && shots < maxshots) {
         playerState = Player::Recharge;
@@ -45,6 +50,7 @@ void Player::update(float deltaTime)
         dx = dx*deltaTime*speed;
         dy = dy*deltaTime*speed;
         bool shot = InputManager::action(controls.shot);
+
         // Move sprite
         moveWithCollisions(sf::Vector2f(dx, dy));
 
@@ -55,10 +61,10 @@ void Player::update(float deltaTime)
             else direction = dx > 0 ? Player::Right: Player::Left;
         }
 
-        if(shot && shots > 0 && shootCooldown == 0.0f) {
-            disparar();
-        }
+        //shoot
+        if(shot && shots > 0 && shootCooldown == 0.0f) disparar();
     }
+    if(pushingTime > 0.0f) moveWithCollisions(pushImpulse*deltaTime*(pushingTime/totalPushingTime));
     backTex.setPosition(getPosition());
     setAnimState(((int)playerState)*4+((int)direction));
     updateBackTextureRect();
