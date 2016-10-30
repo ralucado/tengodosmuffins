@@ -20,21 +20,21 @@ Party::Party(){
     ASSERT(playerTex.loadFromFile("Resources/mafin.png"));
     ASSERT(bulletTex.loadFromFile("Resources/ShittyPepitty.png"));
     players.push_back(new Player(this, &playerTex, &collisionMap,
-        {
-            InputAction::shot0,
-            InputAction::recharge0,
-            InputAction::moveX0,
-            InputAction::moveY0
-        } , 8 , 8
-    ));
+    {
+                                     InputAction::shot0,
+                                     InputAction::recharge0,
+                                     InputAction::moveX0,
+                                     InputAction::moveY0
+                                 } , 8 , 8
+                                 ));
     players.push_back(new Player(this, &playerTex, &collisionMap,
-        {
-            InputAction::shot1,
-            InputAction::recharge1,
-            InputAction::moveX1,
-            InputAction::moveY1
-        } , 8 , 8
-    ));
+    {
+                                     InputAction::shot1,
+                                     InputAction::recharge1,
+                                     InputAction::moveX1,
+                                     InputAction::moveY1
+                                 } , 8 , 8
+                                 ));
     for(int i = 0; i < 1; ++i)
         zombies.push_back(new Zombie(this, &zombieTex, &collisionMap,8,8));
     map = new Map(&backgroundMap);
@@ -65,11 +65,10 @@ void Party::update(float deltaTime, sf::RenderWindow* window){
             continue;
         }
         for(Zombie* z : zombies) {
-            sf::Vector2f diff = z->getPosition()-z->getPosition();
-            float l = sqrt(diff.x*diff.x + diff.y+diff.y);
-            if(l < 30) {
+            if(b->getGlobalBounds().intersects(z->getGlobalBounds())){
                 toDeleteZombies.insert(z);
                 toDelete.insert(b);
+
             }
         }
     }

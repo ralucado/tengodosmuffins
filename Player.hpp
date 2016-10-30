@@ -43,7 +43,6 @@ class Player : public Character {
         float rechargeTime = 1.5f;
         float newBulletTimeCounter = 0.0f;
         float newBulletTime = .125f;
-
         void disparar();
 };
 
