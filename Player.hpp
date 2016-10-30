@@ -26,7 +26,7 @@ class Player : public Character {
             Up
         };
 
-        Player(sf::Texture* tex, sf::Image* collisionMap, Controls pc);
+        Player(Party* p, sf::Texture* tex, sf::Image* collisionMap, Controls pc);
 
         void update(float deltaTime);
         void draw(sf::RenderWindow* window);

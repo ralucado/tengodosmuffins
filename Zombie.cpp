@@ -1,4 +1,6 @@
 #include "Zombie.hpp"
+#include "Player.hpp"
+#include "party.hpp"
 
 sf::Vector2f normalize(const sf::Vector2f& source) {
     float length = sqrt((source.x * source.x) + (source.y * source.y));
@@ -6,7 +8,7 @@ sf::Vector2f normalize(const sf::Vector2f& source) {
     else return source;
 }
 
-Zombie::Zombie(sf::Texture* tex, sf::Image* collisionMap) : Character(tex, collisionMap) {
+Zombie::Zombie(Party* p, sf::Texture* tex, sf::Image* collisionMap) : Character(p, tex, collisionMap) {
     setScale(sf::Vector2f(0.5f, 0.5f));
 }
 
@@ -17,10 +19,32 @@ void Zombie::calcState() {
     float min = 0.75f;
     float max = 1.25f;
     movementTimeLeft = min + (max-min)*((rand()%100)*0.01f);
+    if(zombieState == Zombie::Chase) movementTimeLeft = 0.001f;
 }
 
 std::pair<bool, sf::Vector2f> Zombie::getNearestPlayerPos() {
-    return std::pair<bool, sf::Vector2f>(false, sf::Vector2f(0,0));
+    float bestDist = -1;
+    sf::Vector2f bestPos;
+    sf::Vector2f myPos= getPosition();
+    for(Player* p : scene->getPlayers()) {
+        sf::Vector2f diff = p->getPosition()-myPos;
+        float len = sqrt((diff.x * diff.x) + (diff.y * diff.y));
+        sf::Vector2f norm = normalize(diff);
+
+        bool collided = false;
+        for(int i = 0; i < len; ++i) {
+            if(checkPixel(myPos+norm*(float)i, sf::Color::Black)) {
+                collided = true;
+                break;
+            }
+        }
+        if(!collided && (bestDist < 0 || bestDist > len)) {
+                bestDist = len;
+                bestPos = p->getPosition();
+        }
+    }
+    std::cout << bestDist << std::endl;
+    return std::pair<bool, sf::Vector2f>(bestDist > 0, bestPos);
 }
 
 void Zombie::calcRandomState() {
@@ -57,9 +81,11 @@ sf::Vector2f Zombie::getDispFromState() {
 }
 
 void Zombie::followPos(sf::Vector2f pos) {
-    (void) pos;
-    ASSERT(false);
-    return;
+    chasingPoint = pos;
+    zombieState = Zombie::Chase;
+    sf::Vector2f diff = pos-getPosition();
+    if(std::abs(diff.y) > std::abs(diff.x)) direction = (diff.y > 0) ? Zombie::Down : Zombie::Up;
+    else direction = (diff.x > 0) ? Zombie::Right : Zombie::Left;
 }
 
 void Zombie::update(float deltaTime) {

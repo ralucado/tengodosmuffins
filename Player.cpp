@@ -1,7 +1,7 @@
 #include "Player.hpp"
 #include "InputManager.hpp"
 
-Player::Player(sf::Texture* tex, sf::Image* collisionMap, Player::Controls pc) : Character(tex, collisionMap), controls(pc) {
+Player::Player(Party* p,sf::Texture* tex, sf::Image* collisionMap, Player::Controls pc) : Character(p, tex, collisionMap), controls(pc) {
 }
 
 void Player::update(float deltaTime)

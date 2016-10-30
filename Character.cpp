@@ -1,6 +1,6 @@
 #include "Character.hpp"
 
-Character::Character(sf::Texture* tex, sf::Image* collisionMap) : t(tex), collisionMap(collisionMap) {
+Character::Character(Party* p, sf::Texture* tex, sf::Image* collisionMap) : scene(p), t(tex), collisionMap(collisionMap) {
     setPosition(960, 540);
     setTexture(*tex);
     updateTextureRect();
@@ -65,10 +65,10 @@ bool in_interval(float v, float lo, float hi) {
     return v >= lo && v <= hi;
 }
 
-bool checkPixel(sf::Image* i, sf::Vector2f v, sf::Color& c) {
-    return (in_interval(v.x, 0, i->getSize().x-1) &&
-            in_interval(v.y, 0, i->getSize().y-1) &&
-            i->getPixel(v.x, v.y) == c);
+bool Character::checkPixel(sf::Vector2f v, sf::Color c) {
+    return (in_interval(v.x, 0, collisionMap->getSize().x-1) &&
+            in_interval(v.y, 0, collisionMap->getSize().y-1) &&
+            collisionMap->getPixel(v.x, v.y) == c);
 }
 
 bool Character::collides(sf::Vector2f dist)
@@ -79,10 +79,10 @@ bool Character::collides(sf::Vector2f dist)
     int size = 64;
     sf::Vector2f topleft = {r.left+pos.x, r.top+pos.y};
     for(int i = 0; i < size; i++) {
-        if(checkPixel(collisionMap, topleft + sf::Vector2f(i, 0), c) ||
-           checkPixel(collisionMap, topleft + sf::Vector2f(0, i), c) ||
-           checkPixel(collisionMap, topleft + sf::Vector2f(size, i), c) ||
-           checkPixel(collisionMap, topleft + sf::Vector2f(i, size), c))
+        if(checkPixel(topleft + sf::Vector2f(i, 0), c) ||
+           checkPixel(topleft + sf::Vector2f(0, i), c) ||
+           checkPixel(topleft + sf::Vector2f(size, i), c) ||
+           checkPixel(topleft + sf::Vector2f(i, size), c))
             return true;
     };
     return false;

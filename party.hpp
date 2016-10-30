@@ -18,12 +18,13 @@ class Party : public Scene{
         void update(float deltaTime, sf::RenderWindow *window) final override;
         void draw(sf::RenderWindow *window) final override;
         void updateButtons(sf::Event e) final override;
+        const std::vector<Player*>& getPlayers() const {return players;}
+        const std::vector<Zombie*>& getZombies() const {return zombies;}
     private:
         sf::Image collisionMap;
         sf::Texture playerTex;
         sf::Texture zombieTex;
-        Player* player1 = nullptr;
-        Player* player2 = nullptr;
+        std::vector<Player*> players;
         std::vector<Zombie*> zombies;
         Map* map;
 

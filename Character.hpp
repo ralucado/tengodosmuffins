@@ -2,9 +2,10 @@
 #define CHARACTER_HPP
 #include "commons.hpp"
 
+class Party;
 class Character : public sf::Sprite {
     public:
-        Character(sf::Texture* tex, sf::Image* collisionMap);
+        Character(Party* p, sf::Texture* tex, sf::Image* collisionMap);
 
         bool moveWithCollisions(sf::Vector2f dist);
         bool collides(sf::Vector2f dist);
@@ -14,7 +15,9 @@ class Character : public sf::Sprite {
         void updateAnimState(float deltaTime);
 
     protected:
+        bool checkPixel(sf::Vector2f v, sf::Color c);
         sf::Texture* t;
+        Party* scene;
 
     private:
         sf::Image* collisionMap = nullptr;

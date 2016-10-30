@@ -16,43 +16,46 @@ Party::Party(){
     ASSERT(collisionMap.loadFromFile("Resources/BackgroundTest.png"));
     ASSERT(zombieTex.loadFromFile("Resources/zombieMuffin.png"));
     ASSERT(playerTex.loadFromFile("Resources/mafin.png"));
-    player1 = new Player(&playerTex, &collisionMap,
+    players.push_back(new Player(this, &playerTex, &collisionMap,
         {
             InputAction::shot0,
             InputAction::recharge0,
             InputAction::moveX0,
             InputAction::moveY0
         }
-    );
-    player2 = new Player(&playerTex, &collisionMap,
+    ));
+    players.push_back(new Player(this, &playerTex, &collisionMap,
         {
             InputAction::shot1,
             InputAction::recharge1,
             InputAction::moveX1,
             InputAction::moveY1
         }
-    );
-    zombies.push_back(new Zombie(&zombieTex, &collisionMap));
+    ));
+    for(int i = 0; i < 100; ++i)
+        zombies.push_back(new Zombie(this, &zombieTex, &collisionMap));
     map = new Map(&collisionMap);
 }
 
 Party::~Party(){
-    delete player1;
-    delete player2;
+    for(auto p : players)
+        delete p;
+    for(auto p : zombies)
+        delete p;
 }
 
 void Party::update(float deltaTime, sf::RenderWindow* window){
     InputManager::update();
-    player1->update(deltaTime);
-    player2->update(deltaTime);
+    for(Player* p : players)
+        p->update(deltaTime);
     for(Zombie* z : zombies)
         z->update(deltaTime);
 }
 
 void Party::draw(sf::RenderWindow*window){
     map->draw(window);
-    player1->draw(window);
-    player2->draw(window);
+    for(Player* p : players)
+        p->draw(window);
     for(Zombie* z : zombies)
         z->draw(window);
 }
