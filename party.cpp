@@ -17,23 +17,24 @@ Party::Party(){
     ASSERT(collisionMap.loadFromFile("Resources/BackgroundCollider.png"));
     ASSERT(backgroundMap.loadFromFile("Resources/Background.png"));
     ASSERT(zombieTex.loadFromFile("Resources/zombieMuffin.png"));
-    ASSERT(playerTex.loadFromFile("Resources/mafin.png"));
+    ASSERT(playerTexFace.loadFromFile("Resources/mafin.png"));
+    ASSERT(playerTex.loadFromFile("Resources/mafinPepptiter.png"));
     ASSERT(bulletTex.loadFromFile("Resources/ShittyPepitty.png"));
-    players.push_back(new Player(this, &playerTex, &collisionMap,
+    players.push_back(new Player(this, &playerTex, &playerTexFace, &collisionMap,
     {
                                      InputAction::shot0,
                                      InputAction::recharge0,
                                      InputAction::moveX0,
                                      InputAction::moveY0
-                                 } , 8 , 8
+                                 } , 9 , 8
                                  ));
-    players.push_back(new Player(this, &playerTex, &collisionMap,
+    players.push_back(new Player(this, &playerTex, &playerTexFace, &collisionMap,
     {
                                      InputAction::shot1,
                                      InputAction::recharge1,
                                      InputAction::moveX1,
                                      InputAction::moveY1
-                                 } , 8 , 8
+                                 } , 9 , 8
                                  ));
     for(int i = 0; i < 100; ++i)
         zombies.push_back(new Zombie(this, &zombieTex, &collisionMap,8,8));

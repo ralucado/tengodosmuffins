@@ -2,19 +2,28 @@
 #include "InputManager.hpp"
 #include "party.hpp"
 
-Player::Player(Party* p,sf::Texture* tex, sf::Image* collisionMap, Player::Controls pc, int numStates, int numFrames) : Character(p, tex, collisionMap, numStates, numFrames), controls(pc) {
+Player::Player(Party* p,sf::Texture* tex, sf::Texture* texFace, sf::Image* collisionMap, Player::Controls pc, int numStates, int numFrames) : Character(p, texFace, collisionMap, numStates, numFrames), controls(pc) {
     shots = maxshots;
     setScale(sf::Vector2f(0.5f, 0.5f));
     spriteSize = 128;
+
+    backTex.setPosition(960, 340);
+    backTex.setTexture(*tex);
+    backTex.setScale(sf::Vector2f(0.5f, 0.5f));
+    updateBackTextureRect();
+}
+
+void Player::updateBackTextureRect() {
+    backTex.setTextureRect(sf::IntRect(shots*spriteSize, direction*spriteSize, spriteSize, spriteSize));
 }
 
 void Player::update(float deltaTime)
 {
     shootCooldown = std::max(0.0f, shootCooldown-deltaTime);
     bool recharging = InputManager::action(controls.recharge);
-    std::cout << recharging << " " << shots << std::endl;
-
     if(recharging && shots < maxshots) {
+        playerState = Player::Recharge;
+        direction = Player::Down;
         rechargeTimeCounter -= deltaTime;
         if(rechargeTimeCounter <= 0) {
             newBulletTimeCounter -= deltaTime;
@@ -50,11 +59,14 @@ void Player::update(float deltaTime)
             disparar();
         }
     }
+    backTex.setPosition(getPosition());
     setAnimState(((int)playerState)*4+((int)direction));
+    updateBackTextureRect();
     updateAnimState(deltaTime);
 }
 
 void Player::draw(sf::RenderWindow* window) {
+    window->draw(backTex);
     window->draw(*this);
 }
 

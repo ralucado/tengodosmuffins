@@ -16,7 +16,8 @@ class Player : public Character {
 
         enum PlayerState {
             Idle = 0,
-            Walk = 1
+            Walk = 1,
+            Recharge = 2
         };
 
         enum Direction {
@@ -26,10 +27,12 @@ class Player : public Character {
             Up
         };
 
-        Player(Party* p, sf::Texture* tex, sf::Image* collisionMap, Controls pc, int numStates, int numFrames);
+        Player(Party* p, sf::Texture* tex, sf::Texture* texFace, sf::Image* collisionMap, Controls pc, int numStates, int numFrames);
 
         void update(float deltaTime);
         void draw(sf::RenderWindow* window);
+        void updateBackTextureRect();
+
 
     private:
         float speed = 300.0f;
@@ -37,13 +40,14 @@ class Player : public Character {
         Direction direction = Down;
         PlayerState playerState = Idle;
         int shots;
-        int maxshots = 70;
+        int maxshots = 7;
         float shootCooldown = 0.0f;
         float rechargeTimeCounter = 1.5f;
         float rechargeTime = 1.5f;
         float newBulletTimeCounter = 0.0f;
         float newBulletTime = .125f;
         void disparar();
+        sf::Sprite backTex;
 };
 
 #endif // PLAYER_H

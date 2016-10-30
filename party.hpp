@@ -25,6 +25,7 @@ class Party : public Scene{
     private:
         sf::Image collisionMap;
         sf::Image backgroundMap;
+        sf::Texture playerTexFace;
         sf::Texture playerTex;
         sf::Texture zombieTex;
         sf::Texture bulletTex;
