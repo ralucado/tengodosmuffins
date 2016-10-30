@@ -10,7 +10,7 @@ void Player::update(float deltaTime)
     // Get input
     float dx = InputManager::action(controls.X)*deltaTime*speed;
     float dy = InputManager::action(controls.Y)*deltaTime*speed;
-    float MIN = 0.1f;
+    float MIN = 0.2f;
     if(std::abs(dx) < MIN) dx = 0.0f;
     if(std::abs(dy) < MIN) dy = 0.0f;
 

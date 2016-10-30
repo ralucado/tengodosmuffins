@@ -16,10 +16,10 @@ void Zombie::calcState() {
     std::pair<bool, sf::Vector2f> nearestPlayer = getNearestPlayerPos();
     if(!nearestPlayer.first) calcRandomState();
     else followPos(nearestPlayer.second);
-    float min = 0.75f;
-    float max = 1.25f;
+    float min = 0.1f;
+    float max = 1.50f;
     movementTimeLeft = min + (max-min)*((rand()%100)*0.01f);
-    if(zombieState == Zombie::Chase) movementTimeLeft = 0.001f;
+    if(zombieState == Zombie::Chase) movementTimeLeft = 0.1f;
 }
 
 std::pair<bool, sf::Vector2f> Zombie::getNearestPlayerPos() {
@@ -43,7 +43,6 @@ std::pair<bool, sf::Vector2f> Zombie::getNearestPlayerPos() {
                 bestPos = p->getPosition();
         }
     }
-    std::cout << bestDist << std::endl;
     return std::pair<bool, sf::Vector2f>(bestDist > 0, bestPos);
 }
 
@@ -103,6 +102,8 @@ void Zombie::update(float deltaTime) {
 
     int state = std::min((int)zombieState, 1);
     setAnimState(4*state+(int)direction);
+    updateAnimState(deltaTime);
+
 
     //nearest player
     //nearest seen player

@@ -23,8 +23,8 @@ class Character : public sf::Sprite {
         sf::Image* collisionMap = nullptr;
         sf::Vector2f spriteSize = sf::Vector2f(128, 128);
         unsigned int numStates = 8;
-        unsigned int numFrames = 1;
-        float frameTime = 0.3f; //seconds
+        unsigned int numFrames = 8;
+        float frameTime = 0.1f; //seconds
         // 0 <= currState < numStates
         unsigned int currState = 0;
         // 0 <= currFrame < numFrames

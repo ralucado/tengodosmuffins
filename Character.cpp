@@ -1,7 +1,7 @@
 #include "Character.hpp"
 
 Character::Character(Party* p, sf::Texture* tex, sf::Image* collisionMap) : scene(p), t(tex), collisionMap(collisionMap) {
-    setPosition(960, 540);
+    setPosition(960, 340);
     setTexture(*tex);
     updateTextureRect();
 }

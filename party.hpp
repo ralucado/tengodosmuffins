@@ -22,6 +22,7 @@ class Party : public Scene{
         const std::vector<Zombie*>& getZombies() const {return zombies;}
     private:
         sf::Image collisionMap;
+        sf::Image backgroundMap;
         sf::Texture playerTex;
         sf::Texture zombieTex;
         std::vector<Player*> players;

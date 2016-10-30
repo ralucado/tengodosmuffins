@@ -13,7 +13,8 @@ Party::Party(){
     InputManager::bind(InputAction::recharge1, 1, 4);
     InputManager::bind(InputAction::shot1, 1, 0);
 
-    ASSERT(collisionMap.loadFromFile("Resources/BackgroundTest.png"));
+    ASSERT(collisionMap.loadFromFile("Resources/BackgroundCollider.png"));
+    ASSERT(backgroundMap.loadFromFile("Resources/Background.png"));
     ASSERT(zombieTex.loadFromFile("Resources/zombieMuffin.png"));
     ASSERT(playerTex.loadFromFile("Resources/mafin.png"));
     players.push_back(new Player(this, &playerTex, &collisionMap,
@@ -34,7 +35,7 @@ Party::Party(){
     ));
     for(int i = 0; i < 100; ++i)
         zombies.push_back(new Zombie(this, &zombieTex, &collisionMap));
-    map = new Map(&collisionMap);
+    map = new Map(&backgroundMap);
 }
 
 Party::~Party(){
