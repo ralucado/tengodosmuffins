@@ -11,12 +11,14 @@ Player::Player(Party* p,sf::Texture* tex, sf::Image* collisionMap, Player::Contr
 void Player::update(float deltaTime)
 {
     // Get input
-    float dx = InputManager::action(controls.X)*deltaTime*speed;
-    float dy = InputManager::action(controls.Y)*deltaTime*speed;
-    bool shot = InputManager::action(controls.shot);
-    float MIN = 0.3f;
+    float dx = InputManager::action(controls.X);
+    float dy = InputManager::action(controls.Y);
+    float MIN = 0.2f;
     if(std::abs(dx) < MIN) dx = 0.0f;
     if(std::abs(dy) < MIN) dy = 0.0f;
+    dx = dx*deltaTime*speed;
+    dy = dy*deltaTime*speed;
+    bool shot = InputManager::action(controls.shot);
     // Move sprite
     moveWithCollisions(sf::Vector2f(dx, dy));
 
