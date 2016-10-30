@@ -3,8 +3,9 @@
 Bullet::Bullet(Party*p, sf::Texture*tex, sf::Image*collisionMap, int numStates, int numFrames, sf::Vector2f mov, Player* pl) :
     Character(p, tex, collisionMap, numStates, numFrames),
     player(pl) {
-    setScale(sf::Vector2f(0.2f, 0.2f));
-    setPosition(player->getPosition());
+    float scale = 0.2f;
+    setScale(sf::Vector2f(scale,scale));
+    setPosition(player->getPosition().x+player->getTextureRect().width*scale  , player->getPosition().y+player->getTextureRect().height*scale);
     this->mov = mov*speed;
     spriteSize = 64;
 }
