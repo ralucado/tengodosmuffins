@@ -18,6 +18,8 @@ class Menu : public Scene{
         Button _start = Button("Resources/buttontejempl.png");
         Button _exit = Button("Resources/buttontejempl2.png");
         std::vector<Button*> _buttons;
+        sf::Texture backg;
+        sf::Sprite backgSprite;
 };
 
 #endif // MENU_H

@@ -2,12 +2,14 @@
 #include "NoTengoMuffins.hpp"
 
 Menu::Menu() {
-    _start.setPosition(5,5);
-    _exit.setPosition(500,500);
+    _start.setPosition(192,796);
+    _exit.setPosition(961,796);
     _start.turnOn();
     _exit.turnOn();
     _buttons.push_back(&_start);
     _buttons.push_back(&_exit);
+    ASSERT(backg.loadFromFile("Resources/title2.png"));
+    backgSprite.setTexture(backg);
 }
 
 void Menu::update(float deltaTime, sf::RenderWindow*window){
@@ -20,6 +22,7 @@ void Menu::update(float deltaTime, sf::RenderWindow*window){
 }
 
 void Menu::draw(sf::RenderWindow* window){
+    window->draw(backgSprite);
     for(unsigned int i = 0; i < _buttons.size(); ++i){
         window->draw(*_buttons[i]);
     }
