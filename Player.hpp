@@ -35,6 +35,7 @@ class Player : public Character {
         void push(sf::Vector2f impulse);
         void upScore(int amount);
         int getScore();
+        void kill();
 
     private:
         void disparar();
@@ -54,6 +55,9 @@ class Player : public Character {
         float rechargeTime = 1.5f;
         float newBulletTimeCounter = 0.0f;
         float newBulletTime = .125f;
+        bool dead = false;
+        float deadTimer = 0.0f;
+        float revivingTimer = 5.0f;
         sf::Sprite backTex;
 };
 

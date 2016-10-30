@@ -6,6 +6,7 @@
 #include <SFML/Graphics.hpp>
 #include <algorithm>
 #include <assert.h>
+#include <cmath>
 #include <iostream>
 #include <string>
 #include <vector>

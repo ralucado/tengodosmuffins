@@ -18,9 +18,8 @@ void Zombie::calcState() {
     if(!nearestPlayer.first) calcRandomState();
     else followPos(nearestPlayer.second);
     float min = 0.1f;
-    float max = 1.50f;
+    float max = 2.0f;
     movementTimeLeft = min + (max-min)*((rand()%100)*0.01f);
-    if(zombieState == Zombie::Chase) movementTimeLeft = 0.1f;
 }
 int Zombie::getPoints() const
 {
@@ -94,12 +93,13 @@ void Zombie::followPos(sf::Vector2f pos) {
     chasingPoint = pos;
     zombieState = Zombie::Chase;
     sf::Vector2f diff = pos-getPosition();
+    if(std::abs(diff.x) < 1 && std::abs(diff.y) < 1)
+        calcRandomState();
     if(std::abs(diff.y) > std::abs(diff.x)) direction = (diff.y > 0) ? Zombie::Down : Zombie::Up;
     else direction = (diff.x > 0) ? Zombie::Right : Zombie::Left;
 }
 
 void Zombie::update(float deltaTime) {
-    (void) deltaTime;
     movementTimeLeft -= deltaTime;
 
     // Move sprite
@@ -115,26 +115,11 @@ void Zombie::update(float deltaTime) {
     setAnimState(4*state+(int)direction);
     updateAnimState(deltaTime);
 
-
-    //nearest player
-    //nearest seen player
-
-    //set nearest alive player
-        //nearest distance
-    //set nearest seen alive player
-        //raycasting between zombie an player
-
-    //if nearest seen player != null
-        //go towards nearest seen player
-
-    // if nearest player != null
-        //get last player checkpoint
-        //get zombie last checkpoint
-        //bfs between checkpoints
-        //move towards nearest bfs checkpoint
-
-    //if all null
-        //move random between nearest checkpoints
+    for(Player* p : scene->getPlayers()) {
+        if(getGlobalBounds().intersects(p->getGlobalBounds())){
+            p->kill();
+        }
+    }
 }
 
 void Zombie::draw(sf::RenderWindow* window) {

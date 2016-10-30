@@ -27,9 +27,11 @@ class Party : public Scene{
         sf::Image backgroundMap;
         sf::Texture playerTexFace;
         sf::Texture playerTex;
+        sf::Texture playerTex2;
         sf::Texture zombieTex;
         sf::Texture bulletTex;
         sf::Texture numberText;
+        sf::Texture bulletTex2;
         std::vector<Player*> players;
         std::vector<Zombie*> zombies;
         std::vector<Bullet*> bullets;
